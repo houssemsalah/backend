@@ -1,0 +1,18 @@
+stages:
+  - 7afel
+
+build-dev:                                                                                                                  
+  image: docker:latest                                                                                                      
+  stage: 7afel                                                                                                              
+  only:                                                                                                                     
+    - master                                                                                                               
+  tags:                                                                                                                     
+    - runner                                                                                                   
+  script:                                                                                                                                                                       
+    - docker login -u token -p gzgQEcU2t7fjB9RHdWXV registry.gitlab.com                                                  
+    - docker build -t registry.gitlab.com/myhealthnetwork/myhealthnetwork .                                             
+    - docker push registry.gitlab.com/myhealthnetwork/myhealthnetwork
+    - docker stack rm api
+    - docker pull registry.gitlab.com/myhealthnetwork/myhealthnetwork
+    - docker stack deploy -c docker-compose.yml api                                                   
+                                                                                                                              
