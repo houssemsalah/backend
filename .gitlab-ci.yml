@@ -9,7 +9,7 @@ build-dev:
   tags:                                                                                                                     
     - runner                                                                                                   
   script:                                                                                                                                                                       
-    - docker login -u token -p gzgQEcU2t7fjB9RHdWXV registry.gitlab.com                                                  
+    - docker login -u token -p JiM2fyJEG4hyPGcFPd5F registry.gitlab.com                                                  
     - docker build -t registry.gitlab.com/myhealthnetwork/myhealthnetwork .                                             
     - docker push registry.gitlab.com/myhealthnetwork/myhealthnetwork
     - docker stack rm api
