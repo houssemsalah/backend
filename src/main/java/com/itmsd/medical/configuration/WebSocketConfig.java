@@ -13,7 +13,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry stompEndpointRegistry) {
 		stompEndpointRegistry.addEndpoint("/notification")
-				.setAllowedOrigins("http://localhost:3000","https://my-health-network.netlify.app")
+				.setAllowedOrigins("http://localhost:3000","https://my-health-network.netlify.app","https://my-health-network.be")
 				.withSockJS();
 	}
 	
