@@ -114,7 +114,7 @@ public class SearchController {
 					userRepository.findTopConsulted().remove(user);
 				}
 				if (!user.getRoles().stream().findFirst().get().getRole().contains("admin")&&
-						!user.getRoles().stream().findFirst().get().getRole().contains("patient")) {
+						!user.getRoles().stream().findFirst().get().getRole().contains("patient") && !user.isDeleted()) {
 					Personne pt = new Personne();
 					pt.id = user.getId();
 					pt.phoneNumber = user.getPhoneNumber();
@@ -506,7 +506,8 @@ public class SearchController {
 			List<Medecin> medecin = medecinRepository.findAll();	
 			List<MembersDto> members = new ArrayList<>();
 			medecin.forEach(med -> {
-				MembersDto member = new MembersDto();
+				if (!med.isDeleted()) {
+					MembersDto member = new MembersDto();
 				member.setId(med.getId());
 				member.setFirstName(med.getFirstName());
 				member.setLastName(med.getLastName());
@@ -516,6 +517,8 @@ public class SearchController {
 				member.setImageUrl(med.getPhotoUrl());
 				member.setStatus(med.getOnline());
 				members.add(member);
+				}
+				
 			});
 			Collections.reverse(members);
 			return ResponseEntity.ok().body(members);
@@ -523,7 +526,8 @@ public class SearchController {
 			List<Psychologue> medecin = psychologueRepository.findAll();	
 			List<MembersDto> members = new ArrayList<>();
 			medecin.forEach(med -> {
-				MembersDto member = new MembersDto();
+				if (!med.isDeleted()) {
+					MembersDto member = new MembersDto();
 				member.setId(med.getId());
 				member.setFirstName(med.getFirstName());
 				member.setLastName(med.getLastName());
@@ -532,6 +536,8 @@ public class SearchController {
 				member.setImageUrl(med.getPhotoUrl());
 				member.setStatus(med.getOnline());
 				members.add(member);
+				}
+			
 			});
 			Collections.reverse(members);
 			return ResponseEntity.ok().body(members);
@@ -539,7 +545,8 @@ public class SearchController {
 			List<Dentiste> medecin = dentisteRepository.findAll();	
 			List<MembersDto> members = new ArrayList<>();
 			medecin.forEach(med -> {
-				MembersDto member = new MembersDto();
+				if (!med.isDeleted()) {
+					MembersDto member = new MembersDto();
 				member.setId(med.getId());
 				member.setFirstName(med.getFirstName());
 				member.setLastName(med.getLastName());
@@ -548,6 +555,8 @@ public class SearchController {
 				member.setImageUrl(med.getPhotoUrl());
 				member.setStatus(med.getOnline());
 				members.add(member);
+				}
+				
 			});
 			Collections.reverse(members);
 			return ResponseEntity.ok().body(members);
@@ -555,7 +564,8 @@ public class SearchController {
 			List<Kine> medecin = kineRepository.findAll();	
 			List<MembersDto> members = new ArrayList<>();
 			medecin.forEach(med -> {
-				MembersDto member = new MembersDto();
+				if (!med.isDeleted()) {
+					MembersDto member = new MembersDto();
 				member.setId(med.getId());
 				member.setFirstName(med.getFirstName());
 				member.setLastName(med.getLastName());
@@ -564,6 +574,8 @@ public class SearchController {
 				member.setImageUrl(med.getPhotoUrl());
 				member.setStatus(med.getOnline());
 				members.add(member);
+				}
+				
 			});
 			Collections.reverse(members);
 			return ResponseEntity.ok().body(members);
