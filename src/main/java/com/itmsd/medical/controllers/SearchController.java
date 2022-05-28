@@ -487,15 +487,18 @@ public class SearchController {
 		}else if (category.contains("pharmacie")){
 			List<Pharmacie> pharmacie = pharmacieRepository.findAll();	
 			List<MembersDto> members = new ArrayList<>();
+			
 			pharmacie.forEach(ph -> {
-				MembersDto member = new MembersDto();
-				member.setId(ph.getId());
-				member.setName(ph.getName());
-				member.setUsername(ph.getUsername());
-				member.setCreatedAt(ph.getCreatedAt());
-				member.setImageUrl(ph.getPhotoUrl());
-				member.setStatus(ph.getOnline());
-				members.add(member);
+				if (!ph.isDeleted()) {
+					MembersDto member = new MembersDto();
+					member.setId(ph.getId());
+					member.setName(ph.getName());
+					member.setUsername(ph.getUsername());
+					member.setCreatedAt(ph.getCreatedAt());
+					member.setImageUrl(ph.getPhotoUrl());
+					member.setStatus(ph.getOnline());
+					members.add(member);
+				}
 			});
 			Collections.reverse(members);
 			return ResponseEntity.ok().body(members);
@@ -568,7 +571,8 @@ public class SearchController {
 			List<Veterinaire> medecin = veterinaireRepository.findAll();	
 			List<MembersDto> members = new ArrayList<>();
 			medecin.forEach(med -> {
-				MembersDto member = new MembersDto();
+				if (!med.isDeleted()) {
+					MembersDto member = new MembersDto();
 				member.setId(med.getId());
 				member.setFirstName(med.getFirstName());
 				member.setLastName(med.getLastName());
@@ -577,6 +581,7 @@ public class SearchController {
 				member.setImageUrl(med.getPhotoUrl());
 				member.setStatus(med.getOnline());
 				members.add(member);
+				}
 			});
 			Collections.reverse(members);
 			return ResponseEntity.ok().body(members);

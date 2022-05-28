@@ -8,7 +8,7 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String home() {
-		return "Under Construction API'S :)";
+		return "Under Construction API'S ! :)";
 	}
 	
 }
